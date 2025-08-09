@@ -59,7 +59,7 @@ Make sure you have installed:
 docker-compose up --build
 Services:
 
-Frontend; http://localhost:3000
+Frontend: http://localhost:3000
 
 Backend API: http://localhost:3001
 
