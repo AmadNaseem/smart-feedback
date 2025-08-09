@@ -1,0 +1,62 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
+      POSTGRES_DB: smart_feedback
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - sf-network
+
+  backend:
+    build: ./backend
+    restart: on-failure
+    depends_on:
+      - db
+      - ml
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_NAME: smart_feedback
+      ML_SERVICE_URL: http://ml:8000/analyze
+      PORT: 3001
+    ports:
+      - "3001:3001"
+    networks:
+      - sf-network
+
+  frontend:
+    build: ./frontend
+    restart: on-failure
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:3001
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - sf-network
+
+  ml:
+    build: ./ml-service
+    restart: on-failure
+    ports:
+      - "8000:8000"
+    networks:
+      - sf-network
+
+volumes:
+  pgdata:
+
+networks:
+  sf-network:
+    driver: bridge

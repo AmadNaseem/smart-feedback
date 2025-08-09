@@ -1,0 +1,16 @@
+# Logs
+*.log
+*.tsbuildinfo
+
+./frontend/dist
+./frontend/.next
+./frontend/build
+./frontend/*.env
+./frontend/node_modules
+
+./backend/dist
+./backend/.next
+./backend/build
+./backend/*.env
+./backend/node_modules
+
