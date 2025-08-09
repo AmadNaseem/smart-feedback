@@ -1,4 +1,5 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, Request } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { FeedbackService } from './feedback.service';
 
 @Controller('feedback')
@@ -13,11 +14,13 @@ export class FeedbackController {
     return this.svc.create(body);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   async list() {
     return this.svc.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('analytics')
   async analytics() {
     return this.svc.analytics();

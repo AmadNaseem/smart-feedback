@@ -13,11 +13,6 @@ export default function Home() {
 
       <FeedbackForm />
 
-      <p className="mt-6 text-center">
-        <a href="/admin" className="text-purple-600 font-semibold hover:underline">
-          Admin dashboard
-        </a>
-      </p>
     </main>
   );
 }
