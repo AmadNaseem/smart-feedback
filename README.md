@@ -118,6 +118,8 @@ npm run seed
 amadnaseem05@gmail.com
 ```
 
+---
+
 ### Screenshots
 - Home Page
 <img width="1400" height="700" alt="image" src="https://github.com/user-attachments/assets/e723feb0-8a63-432d-af90-6d452fba439a" />
