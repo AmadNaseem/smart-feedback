@@ -32,7 +32,7 @@ export default function Signup() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+  <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-50 via-violet-50 to-blue-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-slate-900 dark:text-slate-100">
       <form onSubmit={handleSignup} className="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg w-full max-w-sm space-y-4">
         <h2 className="text-2xl font-bold mb-4 text-center">Sign Up</h2>
         <input

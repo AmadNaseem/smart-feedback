@@ -23,20 +23,20 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="bg-white shadow-md py-4 px-8 flex justify-between items-center sticky top-0 z-50">
-      <div className="text-xl font-bold text-blue-700">Smart Feedback</div>
+    <nav className="backdrop-blur-md bg-white/70 dark:bg-gray-900/70 shadow-lg py-4 px-8 flex justify-between items-center sticky top-0 z-50 border-b border-indigo-100 dark:border-slate-800">
+  <div className="text-2xl font-extrabold bg-gradient-to-r from-primary via-secondary to-accent text-transparent bg-clip-text drop-shadow-sm tracking-tight">Smart Feedback</div>
       <div className="space-x-6 flex items-center">
         <Link href="/">
-          <span className="hover:text-blue-600 cursor-pointer">Home</span>
+          <span className="hover:text-primary dark:hover:text-accent cursor-pointer font-medium transition">Home</span>
         </Link>
         <Link href="/admin">
-          <span className="hover:text-blue-600 cursor-pointer">Admin</span>
+          <span className="hover:text-secondary dark:hover:text-accent cursor-pointer font-medium transition">Admin</span>
         </Link>
         {loggedIn ? (
-          <button onClick={handleLogout} className="ml-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition">Logout</button>
+          <button onClick={handleLogout} className="ml-4 px-4 py-2 bg-gradient-to-r from-error to-pink text-white rounded-xl shadow hover:from-pink-600 hover:to-error transition font-semibold">Logout</button>
         ) : (
           <Link href="/login">
-            <span className="ml-4 px-4 py-2 bg-primary text-white rounded hover:bg-blue-700 transition cursor-pointer">Login</span>
+            <span className="ml-4 px-4 py-2 bg-gradient-to-r from-primary to-accent text-white rounded-xl shadow hover:from-accent hover:to-primary transition font-semibold cursor-pointer">Login</span>
           </Link>
         )}
       </div>

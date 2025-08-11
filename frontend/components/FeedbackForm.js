@@ -30,43 +30,43 @@ export default function FeedbackForm({ onSubmitted }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-8 rounded-2xl shadow-lg max-w-lg mx-auto space-y-6 transition-all duration-200"
+      className="backdrop-blur-md bg-white/70 dark:bg-gray-900/70 border border-gray-200 dark:border-gray-700 p-8 rounded-3xl shadow-2xl max-w-lg mx-auto space-y-7 transition-all duration-300 ring-1 ring-indigo-100 dark:ring-slate-800"
     >
       <div>
-        <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Your name (optional)</label>
+  <label className="block text-sm font-semibold mb-2 text-primary dark:text-accent">Your name (optional)</label>
         <input
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
-          className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/60 text-base shadow-sm"
         />
       </div>
       <div>
-        <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Feedback</label>
+  <label className="block text-sm font-semibold mb-2 text-secondary dark:text-accent">Feedback</label>
         <textarea
           required
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-primary"
+          className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-primary/60 text-base shadow-sm"
         />
       </div>
       <div>
-        <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Rating</label>
+  <label className="block text-sm font-semibold mb-2 text-accent dark:text-secondary">Rating</label>
         <input
           type="number"
           min="1"
           max="10"
           value={rating}
           onChange={(e) => setRating(e.target.value)}
-          className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="p-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/60 text-base shadow-sm w-24"
         />
       </div>
       <button
         type="submit"
-        className="w-full bg-gradient-to-r from-primary to-secondary hover:from-blue-700 hover:to-purple-700 text-white p-3 rounded-lg shadow-md font-semibold text-lg transition-all duration-200"
+        className="w-full bg-gradient-to-r from-indigo-500 via-violet-500 to-blue-500 hover:from-blue-700 hover:to-purple-700 text-white p-3 rounded-xl shadow-lg font-semibold text-lg transition-all duration-200 tracking-wide drop-shadow-md hover:scale-[1.03] focus:ring-2 focus:ring-indigo-300"
       >
-        Send feedback
+        <span className="inline-block align-middle">✨ Send feedback</span>
       </button>
-      {message && <p className="text-sm mt-2 text-center text-primary dark:text-secondary">{message}</p>}
+  {message && <p className="text-sm mt-2 text-center text-success dark:text-accent font-medium animate-fade-in">{message}</p>}
     </form>
   );
 }
