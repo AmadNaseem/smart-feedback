@@ -4,17 +4,26 @@ import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
 export default function ThemeSwitcher() {
   const [theme, setTheme] = useState("light");
 
+
   useEffect(() => {
-    const saved = localStorage.getItem("theme") || "light";
+    const saved = localStorage.getItem("theme") || (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
     setTheme(saved);
-    document.documentElement.classList.toggle("dark", saved === "dark");
+    if (saved === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
+    if (newTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   };
 
   return (
@@ -23,10 +32,10 @@ export default function ThemeSwitcher() {
       className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition"
       title="Toggle Theme"
     >
-      {theme === "light" ? (
-        <MoonIcon className="h-5 w-5 text-gray-800" />
-      ) : (
+      {theme === "dark" ? (
         <SunIcon className="h-5 w-5 text-yellow-400" />
+      ) : (
+        <MoonIcon className="h-5 w-5 text-gray-800" />
       )}
     </button>
   );

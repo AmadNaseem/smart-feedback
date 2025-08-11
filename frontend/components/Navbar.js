@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import Button from './ui/Button';
 
 export default function Navbar() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
   const router = useRouter();
-
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -16,30 +18,57 @@ export default function Navbar() {
     }
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   function handleLogout() {
     localStorage.removeItem('token');
     setLoggedIn(false);
     router.push('/login');
   }
 
+  const navLink = (href, label, lockTheme) => {
+    const active = router.pathname === href;
+    const base = 'relative px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50';
+  const color = active ? 'text-primary' : 'text-slate-300';
+    return <Link href={href} className={`${base} ${color}`}>{label}</Link>;
+  };
+
   return (
-    <nav className="backdrop-blur-md bg-white/70 dark:bg-gray-900/70 shadow-lg py-4 px-8 flex justify-between items-center sticky top-0 z-50 border-b border-indigo-100 dark:border-slate-800">
-  <div className="text-2xl font-extrabold bg-gradient-to-r from-primary via-secondary to-accent text-transparent bg-clip-text drop-shadow-sm tracking-tight">Smart Feedback</div>
-      <div className="space-x-6 flex items-center">
-        <Link href="/">
-          <span className="hover:text-primary dark:hover:text-accent cursor-pointer font-medium transition">Home</span>
-        </Link>
-        <Link href="/admin">
-          <span className="hover:text-secondary dark:hover:text-accent cursor-pointer font-medium transition">Admin</span>
-        </Link>
-        {loggedIn ? (
-          <button onClick={handleLogout} className="ml-4 px-4 py-2 bg-gradient-to-r from-error to-pink text-white rounded-xl shadow hover:from-pink-600 hover:to-error transition font-semibold">Logout</button>
-        ) : (
-          <Link href="/login">
-            <span className="ml-4 px-4 py-2 bg-gradient-to-r from-primary to-accent text-white rounded-xl shadow hover:from-accent hover:to-primary transition font-semibold cursor-pointer">Login</span>
-          </Link>
-        )}
+  <header className={`sticky top-0 z-40 transition bg-slate-950/70 backdrop-blur-xl border-b border-slate-800/60 ${scrolled ? 'shadow-sm' : ''}`}>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 flex items-center h-16 gap-4">
+  <Link href="/" className="text-xl font-black tracking-tight bg-gradient-to-r from-primary via-secondary to-accent text-transparent bg-clip-text select-none">SmartFeedback</Link>
+        <nav className="hidden md:flex items-center gap-2 ml-6">
+          {navLink('/', 'Home', true)}
+          {navLink('/admin', 'Admin')}
+        </nav>
+        <div className="ml-auto flex items-center gap-2">
+          {loggedIn ? (
+            <Button onClick={handleLogout} variant="outline" className="hidden sm:inline-flex">Logout</Button>
+          ) : (
+            <Link href="/login" className="hidden sm:inline-flex"><Button variant="primary">Login</Button></Link>
+          )}
+          <button className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-slate-300 hover:bg-slate-800/60" onClick={() => setOpen(o => !o)} aria-label="Toggle Menu">
+            <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h14M3 12h14M3 18h14" /></svg>
+          </button>
+        </div>
       </div>
-    </nav>
+      {open && (
+  <div className="md:hidden border-t border-slate-800/60 bg-slate-950/80 backdrop-blur-xl px-4 pt-2 pb-4 space-y-2">
+          <div className="flex flex-col gap-1">
+            {navLink('/', 'Home', true)}
+            {navLink('/admin', 'Admin')}
+            {loggedIn ? (
+              <Button onClick={handleLogout} variant="outline" className="w-full mt-1">Logout</Button>
+            ) : (
+              <Link href="/login" className="w-full"><Button className="w-full">Login</Button></Link>
+            )}
+          </div>
+        </div>
+      )}
+    </header>
   );
 }

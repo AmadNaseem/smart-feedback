@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { fetchJSON } from '../lib/fetcher';
+import { Card, CardBody, CardHeader, CardTitle } from '../components/ui/Card';
+import Button from '../components/ui/Button';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -29,28 +31,40 @@ export default function Login() {
   }
 
   return (
-  <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-50 via-violet-50 to-blue-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-slate-900 dark:text-slate-100">
-      <form onSubmit={handleLogin} className="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg w-full max-w-sm space-y-4">
-        <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-        <input
-          className="w-full p-3 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800"
-          placeholder="Username"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-          required
-        />
-        <input
-          className="w-full p-3 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800"
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-        />
-        {error && <div className="text-red-500 text-sm text-center">{error}</div>}
-        <button type="submit" className="w-full bg-primary text-white p-3 rounded font-semibold">Login</button>
-        <p className="text-center text-sm mt-2">Don't have an account? <a href="/signup" className="text-blue-600 hover:underline">Sign up</a></p>
-      </form>
+    <div className="px-4 sm:px-6 flex items-center justify-center py-20">
+      <Card className="w-full max-w-md">
+        <CardHeader>
+          <CardTitle>Login</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <form onSubmit={handleLogin} className="space-y-5">
+            <div>
+              <label className="block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-2">Username</label>
+              <input
+                className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/70 dark:bg-slate-800/70 focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
+                placeholder="Username"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-2">Password</label>
+              <input
+                className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/70 dark:bg-slate-800/70 focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
+                placeholder="Password"
+                type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            {error && <div className="text-error text-sm text-center">{error}</div>}
+            <Button type="submit" className="w-full">Login</Button>
+            <p className="text-center text-xs text-slate-500 dark:text-slate-400">Don't have an account? <a href="/signup" className="text-primary font-medium hover:underline">Sign up</a></p>
+          </form>
+        </CardBody>
+      </Card>
     </div>
   );
 }

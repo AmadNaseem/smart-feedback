@@ -4,7 +4,7 @@ import { API_BASE_URL } from "../lib/config";
 import { fetchJSON } from "../lib/fetcher";
 import StatsCard from "../components/StatsCard";
 import FeedbackTable from "../components/FeedbackTable";
-import ThemeSwitcher from "../components/ThemeSwitcher";
+import Button from '../components/ui/Button';
 
 export default function Admin() {
   const [list, setList] = useState([]);
@@ -62,12 +62,15 @@ export default function Admin() {
   });
 
   return (
-  <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-violet-50 to-blue-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 p-6 text-slate-900 dark:text-slate-100">
-      <div className="flex justify-between items-center mb-6">
-  <h1 className="text-3xl font-extrabold bg-gradient-to-r from-indigo-500 via-violet-500 to-blue-500 text-transparent bg-clip-text">
-          Admin Dashboard
-        </h1>
-        <ThemeSwitcher />
+  <main className="max-w-6xl mx-auto px-4 sm:px-6 py-12 text-slate-100">
+      <div className="flex flex-col md:flex-row md:items-center gap-6 mb-10">
+        <div className="flex-1">
+          <h1 className="text-3xl md:text-4xl font-black tracking-tight bg-gradient-to-r from-primary via-secondary to-accent text-transparent bg-clip-text">Dashboard</h1>
+          <p className="mt-2 text-sm text-slate-400 max-w-prose">Monitor incoming feedback, sentiment distribution and refine filters to focus on what matters most.</p>
+        </div>
+        {/* <div className="flex items-center gap-3 self-start md:self-center">
+          <ThemeSwitcher />
+        </div> */}
       </div>
 
       {stats && (
@@ -80,17 +83,12 @@ export default function Admin() {
       )}
 
       <div className="relative mb-6">
-        <button
-          className="px-4 py-2 bg-primary text-white rounded shadow hover:bg-blue-700 transition"
-          onClick={() => setShowFilters((v) => !v)}
-        >
-          Filters
-        </button>
+        <Button onClick={() => setShowFilters(v => !v)} variant="outline">Filters</Button>
         {showFilters && (
-          <div ref={filterRef} className="absolute left-0 mt-2 w-72 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-4 z-20">
+          <div ref={filterRef} className="absolute left-0 mt-2 w-72 rounded-2xl border border-slate-700/70 bg-slate-900/90 backdrop-blur-xl shadow-lg shadow-black/40 p-4 z-20">
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Sentiment</label>
-              <select value={sentiment} onChange={e => setSentiment(e.target.value)} className="w-full p-2 rounded border border-gray-300 dark:border-gray-600">
+              <label className="block text-xs font-medium mb-1 text-slate-400 uppercase tracking-wide">Sentiment</label>
+              <select value={sentiment} onChange={e => setSentiment(e.target.value)} className="w-full p-2 rounded-lg border border-slate-700 bg-slate-800 text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/50">
                 <option value="">All</option>
                 <option value="Positive">Positive</option>
                 <option value="Neutral">Neutral</option>
@@ -98,8 +96,8 @@ export default function Admin() {
               </select>
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Rating</label>
-              <select value={rating} onChange={e => setRating(e.target.value)} className="w-full p-2 rounded border border-gray-300 dark:border-gray-600">
+              <label className="block text-xs font-medium mb-1 text-slate-400 uppercase tracking-wide">Rating</label>
+              <select value={rating} onChange={e => setRating(e.target.value)} className="w-full p-2 rounded-lg border border-slate-700 bg-slate-800 text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/50">
                 <option value="">All</option>
                 {[...Array(10)].map((_, i) => (
                   <option key={i+1} value={i+1}>{i+1}</option>
@@ -107,20 +105,15 @@ export default function Admin() {
               </select>
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Date</label>
-              <input type="date" value={date} onChange={e => setDate(e.target.value)} className="w-full p-2 rounded border border-gray-300 dark:border-gray-600" />
+              <label className="block text-xs font-medium mb-1 text-slate-400 uppercase tracking-wide">Date</label>
+              <input type="date" value={date} onChange={e => setDate(e.target.value)} className="w-full p-2 rounded-lg border border-slate-700 bg-slate-800 text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/50" />
             </div>
-            <button
-              onClick={() => { setSentiment(''); setRating(''); setDate(''); }}
-              className="w-full px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded mt-2"
-            >
-              Clear
-            </button>
+            <Button onClick={() => { setSentiment(''); setRating(''); setDate(''); }} variant="outline" className="w-full mt-2">Clear</Button>
           </div>
         )}
       </div>
 
-      <h2 className="text-xl font-semibold mb-4">Feedback</h2>
+  <h2 className="text-xl font-semibold mb-4 tracking-tight">Feedback</h2>
       <FeedbackTable list={filteredList} />
 
     </main>

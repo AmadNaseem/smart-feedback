@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { API_BASE_URL } from "../lib/config";
 import { fetchJSON } from "../lib/fetcher";
+import Button from './ui/Button';
 
 export default function FeedbackForm({ onSubmitted }) {
   const [text, setText] = useState("");
@@ -30,43 +31,38 @@ export default function FeedbackForm({ onSubmitted }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="backdrop-blur-md bg-white/70 dark:bg-gray-900/70 border border-gray-200 dark:border-gray-700 p-8 rounded-3xl shadow-2xl max-w-lg mx-auto space-y-7 transition-all duration-300 ring-1 ring-indigo-100 dark:ring-slate-800"
+      className="rounded-2xl border border-slate-700/70 bg-slate-900/80 backdrop-blur-xl p-8 shadow-lg shadow-black/40 max-w-xl mx-auto space-y-7 transition-all duration-300"
     >
       <div>
-  <label className="block text-sm font-semibold mb-2 text-primary dark:text-accent">Your name (optional)</label>
+  <label className="block text-sm font-semibold mb-2 text-slate-300">Your name (optional)</label>
         <input
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
-          className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/60 text-base shadow-sm"
+          className="w-full p-3 rounded-xl border border-slate-700 bg-slate-800 focus:outline-none focus:ring-2 focus:ring-primary/60 text-base shadow-sm text-slate-100"
         />
       </div>
       <div>
-  <label className="block text-sm font-semibold mb-2 text-secondary dark:text-accent">Feedback</label>
+  <label className="block text-sm font-semibold mb-2 text-slate-300">Feedback</label>
         <textarea
           required
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-primary/60 text-base shadow-sm"
+          className="w-full p-3 rounded-xl border border-slate-700 bg-slate-800 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-primary/60 text-base shadow-sm text-slate-100"
         />
       </div>
       <div>
-  <label className="block text-sm font-semibold mb-2 text-accent dark:text-secondary">Rating</label>
+  <label className="block text-sm font-semibold mb-2 text-slate-300">Rating</label>
         <input
           type="number"
           min="1"
           max="10"
           value={rating}
           onChange={(e) => setRating(e.target.value)}
-          className="p-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/60 text-base shadow-sm w-24"
+          className="p-3 rounded-xl border border-slate-700 bg-slate-800 focus:outline-none focus:ring-2 focus:ring-primary/60 text-base shadow-sm w-24 text-slate-100"
         />
       </div>
-      <button
-        type="submit"
-        className="w-full bg-gradient-to-r from-indigo-500 via-violet-500 to-blue-500 hover:from-blue-700 hover:to-purple-700 text-white p-3 rounded-xl shadow-lg font-semibold text-lg transition-all duration-200 tracking-wide drop-shadow-md hover:scale-[1.03] focus:ring-2 focus:ring-indigo-300"
-      >
-        <span className="inline-block align-middle">✨ Send feedback</span>
-      </button>
-  {message && <p className="text-sm mt-2 text-center text-success dark:text-accent font-medium animate-fade-in">{message}</p>}
+  <Button type="submit" className="w-full text-base py-3 after:absolute after:inset-0 after:bg-white/10 after:opacity-0 hover:after:opacity-100 after:transition rounded-xl">✨ Send feedback</Button>
+  {message && <p className="text-sm mt-2 text-center text-slate-300 font-medium animate-fade-in">{message}</p>}
     </form>
   );
 }
