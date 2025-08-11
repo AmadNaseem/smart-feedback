@@ -74,12 +74,6 @@ PostgreSQL: localhost:5432 (user: postgres, password: postgres)
 ```bash
 docker-compose down
 ```
-
-### Contact and Support
-```bash
-amadnaseem05@gmail.com
-```
-
 ---
 
 ## Prisma Migrations (Alternative to TypeORM Synchronize)
@@ -118,4 +112,8 @@ npm run prisma:studio
 npm run seed
 ```
 
-Disable TypeORM auto `synchronize` once Prisma is fully adopted to prevent schema drift.
+
+### Contact and Support
+```bash
+amadnaseem05@gmail.com
+```
