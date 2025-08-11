@@ -79,3 +79,43 @@ docker-compose down
 ```bash
 amadnaseem05@gmail.com
 ```
+
+---
+
+## Prisma Migrations (Alternative to TypeORM Synchronize)
+
+Prisma schema added under `backend/prisma/schema.prisma` for managed migrations.
+
+1. Create `backend/.env` (if not present) with:
+
+```
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/smart_feedback?schema=public"
+```
+
+2. Install dependencies & generate client:
+
+```
+cd backend
+npm install
+npm run prisma:generate
+```
+
+3. Run initial migration:
+
+```
+npm run prisma:migrate
+```
+
+4. (Optional) Open Prisma Studio:
+
+```
+npm run prisma:studio
+```
+
+5. Seed initial admin user:
+
+```
+npm run seed
+```
+
+Disable TypeORM auto `synchronize` once Prisma is fully adopted to prevent schema drift.

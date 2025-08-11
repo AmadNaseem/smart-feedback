@@ -5,8 +5,8 @@ services:
     image: postgres:15
     restart: always
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: toor
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       POSTGRES_DB: smart_feedback
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -27,6 +27,7 @@ services:
       DATABASE_USER: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_NAME: smart_feedback
+      DATABASE_URL: "postgresql://postgres:postgres@db:5432/smart_feedback?schema=public"
       ML_SERVICE_URL: http://ml:8000/analyze
       PORT: 3001
     ports:

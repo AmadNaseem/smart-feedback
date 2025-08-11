@@ -1,0 +1,30 @@
+// Prisma schema for smart-feedback
+// Run migrations with: npx prisma migrate dev --name init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  feedbacks Feedback[] @relation("UserFeedbacks")
+  createdAt DateTime @default(now())
+}
+
+model Feedback {
+  id        String   @id @default(uuid())
+  userName  String?  // original optional display name
+  text      String
+  rating    Int?
+  sentiment String   @default("neutral")
+  createdAt DateTime @default(now())
+  userId    Int?     // optional link to registered user
+  user      User?    @relation("UserFeedbacks", fields: [userId], references: [id])
+}
