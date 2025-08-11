@@ -138,6 +138,6 @@ amadnaseem05@gmail.com
 
 - Login/Signup Pages
 <p align="center">
-  <img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/35ca8869-1e9a-4078-b5ca-8e47ae738572" />
-  <img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/95e96d15-bb96-49e9-af6e-b0c9ea2b6eca" />
+  <img width="350" height="200" alt="image" src="https://github.com/user-attachments/assets/35ca8869-1e9a-4078-b5ca-8e47ae738572" />
+  <img width="350" height="200" alt="image" src="https://github.com/user-attachments/assets/95e96d15-bb96-49e9-af6e-b0c9ea2b6eca" />
 </p>
